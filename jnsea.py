@@ -1,22 +1,23 @@
+# Make sure you install these modules with pip if you don't have them
 import time
 import re
 import lxml.html
 import requests
+# You will need to have Chrome and Chrome webdriver installed. The webdriver needs to be in your path
 from selenium import webdriver
 import collections
 import pandas as pd
 from selenium.webdriver.common.by import By
-#import matplotlib.pyplot as plt
 
-#jobtext = ""
+
 TAG_RE = re.compile(r'<[^>]+>')
-file = open('/Users/joel/nationlinks.html',"r")
+file = open('nationlinks.html',"r")
 html = file.read()
 doc = lxml.html.fromstring(html)
 urls = doc.xpath("//a[contains(@class, 'nlink')]/@href")
 browser = webdriver.Chrome()
 browser.get('https://www.nationstates.net')
-print(urls)
+# You have 15 seconds to sign into the browser once it opens
 time.sleep(15)
 for i in urls:
     urlparttwo = str(i)
